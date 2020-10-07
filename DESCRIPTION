@@ -17,3 +17,5 @@ Depends:
     tidyverse
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/danielbride/irug.education
+BugReports: https://github.com/danielbride/irug.education/issues
