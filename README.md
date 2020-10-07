@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Launch Rstudio
+Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danielbride/irug.education/master?urlpath=rstudio)
 <!-- badges: end -->
 
 The irug.education repository allows R learners at Intermountain to
