@@ -1,5 +1,10 @@
 FROM rocker/binder:4.0.2
 LABEL maintainer='Daniel Bride'
+
+## Declares build arguments
+ARG NB_USER
+ARG NB_UID
+
 USER root
 COPY . ${HOME}
 RUN chown -R ${NB_USER} ${HOME}
