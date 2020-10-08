@@ -9,4 +9,4 @@ USER ${NB_USER}
 
 RUN wget https://github.com/danielbride/irug.education/raw/master/DESCRIPTION && R -e "options(repos = list(CRAN = 'http://mran.revolutionanalytics.com/snapshot/2020-10-08/')); devtools::install_deps()"
 
-RUN exit 0
+RUN rm DESCRIPTION.1; exit 0
