@@ -1,6 +1,7 @@
 Type: Compendium
 Package: irug.education
 Title: Facilitate Live Coding and Interactive Tutorials For Intermountain R Learners
+Date: 2020-10-01
 Version: 0.0.1
 Authors@R: 
     person(given = "Daniel",
