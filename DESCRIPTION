@@ -8,8 +8,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "danielbride86@gmail.com",
            comment = c(ORCID = "0000-0002-7950-1267"))
-Description: Standardized, No-Hassle R and RStudio Environment to Facilitate 
-    Live Coding Exercises and Interactive Tutorials For R Learners At Intermountain
+Description: Standardized, No-Hassle R and RStudio
+    Environment to Facilitate Live Coding Exercises and Interactive
+    Tutorials For R Learners At Intermountain
 License: MIT + file LICENSE
 Depends: 
     knitr,
@@ -17,5 +18,3 @@ Depends:
     tidyverse
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/danielbride/irug.education
-BugReports: https://github.com/danielbride/irug.education/issues
