@@ -14,8 +14,6 @@ Description: Standardized, No-Hassle R and RStudio
     Tutorials For R Learners At Intermountain
 License: MIT + file LICENSE
 Depends: 
-    knitr,
-    rmarkdown,
     tidyverse
 Encoding: UTF-8
 LazyData: true
