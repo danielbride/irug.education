@@ -13,7 +13,5 @@ Description: Standardized, No-Hassle R and RStudio
     Environment to Facilitate Live Coding Exercises and Interactive
     Tutorials For R Learners At Intermountain
 License: MIT + file LICENSE
-Depends: 
-    tidyverse
 Encoding: UTF-8
 LazyData: true
