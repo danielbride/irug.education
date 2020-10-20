@@ -1,9 +1,9 @@
+ENV NB_USER=jovyan
 FROM rocker/rstudio:4.0.3-daily
 
 RUN /rocker_scripts/install_tidyverse.sh
 
 RUN /rocker_scripts/install_python.sh
-ENV NB_USER=jovyan
 RUN /rocker_scripts/install_binder.sh
 
 RUN install2.r --error --skipinstalled\
