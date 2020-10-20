@@ -12,9 +12,6 @@ Authors@R:
 Description: Standardized, No-Hassle R and RStudio
     Environment to Facilitate Live Coding Exercises and Interactive
     Tutorials For R Learners At Intermountain
-Depends: 
-    gganimate,
-    gapminder
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

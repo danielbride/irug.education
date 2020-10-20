@@ -1,12 +1,19 @@
-FROM rocker/binder:3.6.3
-LABEL maintainer='Daniel Bride'
-USER root
-COPY . ${HOME}
-RUN chown -R ${NB_USER} ${HOME}
+FROM rocker/geospatial:4.0.3
+
+LABEL org.label-schema.license="GPL-2.0" \
+      org.label-schema.vcs-url="https://github.com/rocker-org/rocker-versioned" \
+      org.label-schema.vendor="Rocker Project" \
+      maintainer="Carl Boettiger <cboettig@ropensci.org>"
+
+ENV NB_USER=jovyan
+
+
+RUN /rocker_scripts/install_python.sh
+RUN /rocker_scripts/install_binder.sh
+
+
+CMD jupyter notebook --ip 0.0.0.0
+
 USER ${NB_USER}
 
-
-
-RUN wget https://github.com/danielbride/irug.education/raw/master/DESCRIPTION && R -e "options(repos = list(CRAN = 'http://mran.revolutionanalytics.com/snapshot/2020-10-09/')); devtools::install_deps()"
-
-RUN rm DESCRIPTION.1; exit 0
+WORKDIR /home/${NB_USER}
