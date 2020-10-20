@@ -19,6 +19,8 @@ CMD jupyter notebook --ip 0.0.0.0
 ## Become normal user again
 USER ${NB_USER}
 
+## Install cargo, rust package manager and requirement for gifski
+RUN apt-get update && apt-get -y install cargo
 
 ## Run an install.R script, if it exists.
 RUN if [ -f install.R ]; then R --quiet -f install.R; fi
