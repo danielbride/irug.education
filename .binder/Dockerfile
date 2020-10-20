@@ -1,4 +1,4 @@
-FROM rocker/binder:latest
+FROM rocker/binder:3.6.3
 LABEL maintainer='Daniel Bride'
 USER root
 COPY . ${HOME}
@@ -7,6 +7,6 @@ USER ${NB_USER}
 
 
 
-RUN wget https://github.com/danielbride/irug.education/raw/intro-lesson/DESCRIPTION && R -e "options(repos = list(CRAN = 'http://mran.revolutionanalytics.com/snapshot/2020-10-18/')); devtools::install_deps()"
+RUN wget https://github.com/danielbride/irug.education/raw/master/DESCRIPTION && R -e "options(repos = list(CRAN = 'http://mran.revolutionanalytics.com/snapshot/2020-10-09/')); devtools::install_deps()"
 
 RUN rm DESCRIPTION.1; exit 0
