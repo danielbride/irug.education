@@ -1,1 +1,1 @@
-install.packages(c("gganimate", "gapminder"))
+install.packages(c("gganimate", "gifski", "gapminder"))
