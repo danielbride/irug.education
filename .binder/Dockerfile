@@ -1,13 +1,12 @@
-ENV NB_USER=jovyan
-FROM rocker/rstudio:4.0.3-daily
+FROM rocker/rstudio:4.0.3
 
 RUN /rocker_scripts/install_tidyverse.sh
 
-RUN /rocker_scripts/install_python.sh
+ENV NB_USER=jovyan
 RUN /rocker_scripts/install_binder.sh
 
 RUN install2.r --error --skipinstalled\
-      gganimate\
+      gganimate \
       gapminder
 
 CMD jupyter notebook --ip 0.0.0.0
