@@ -146,39 +146,42 @@ aqi_colors = c("#5DC863FF",
 
 ani_2019 <- aqi_daily_2019 %>% 
   ggplot() +
-  geom_rect(mapping = aes(xmin = bg_xmin, xmax = bg_xmax,
-                          ymin = bg_ymin, ymax = bg_ymax,
-                          fill = AQI, group = county.Name),
-            alpha = 0.3) +
-  geom_line(mapping = aes(x = Date, y = AQI), color = "grey") +
-  geom_point(mapping = aes(x = Date, y = AQI, group = Date), size = 0.6) +
+  geom_line(mapping = aes(x = Date, y = AQI)) +
+  geom_point(mapping = aes(x = Date, y = AQI, group = Date, color = AQI), size = 0.9) +
   geom_label(mapping = aes(x = Date + 1, y = AQI, 
                            label = aq_label, 
                            group = county.Name), hjust = 0) +
   geom_text(mapping = aes(x = max(Date) + 3, y = 75, label = county.Name),
-            hjust = 0) +
+            hjust = 0.85, vjust = -0.65) +
   facet_grid(rows = vars(county.Name), scales = "free_y") +
-  ggtitle("AQI for {format(as.Date(frame_along, origin = lubridate::origin), format = '%b %d')} by county") +
-  scale_fill_gradientn(name = "Air Quality Index", colors = aqi_colors,
-                       labels = c("Good", "Moderate", "Unhealthy For Sensitive Groups",
-                                  "Unhealthy", "Very Unhealthy"),
-                       values = scaled_aqi_breaks, guide = "legend",
-                       breaks = c(0, 50, 100, 200, 300),
-                       limits = c(-1, 500)) +
+  ggtitle("Air Quality Index by County", "AQI on {format(as.Date(frame_along, origin = lubridate::origin), format = '%b %d')}") +
+  scale_color_gradientn(name = "AQI Categories", colors = aqi_colors,
+                        labels = c("Good", "Moderate", "Unhealthy For\nSensitive Groups",
+                                   "Unhealthy", "Very Unhealthy"),
+                        values = scaled_aqi_breaks, 
+                        guide = guide_legend(direction = "horizontal", nrow = 2,
+                                             title.position = "top",
+                                             size = 10),
+                        breaks = c(0, 50, 100, 200, 300),
+                        limits = c(-1, 500)) +
+  scale_y_continuous(position = "right") +
+  labs(x = NULL, y = NULL) +
   coord_cartesian(ylim = c(0, 200), clip = "off") +
-  theme_minimal() +
-  theme(strip.background = element_blank(), strip.text = element_blank()) +
-  transition_reveal(along = Date) +
-  view_follow()
+  theme_bw() +
+  theme(strip.background = element_blank(), strip.text = element_blank(),
+        legend.position = "top", plot.margin = margin(10, 50, 10, 50),
+        legend.text = element_text(color = "darkgrey", size = rel(0.75)), 
+        legend.background = element_rect(fill = "ivory")) +
+  transition_reveal(along = Date)
 
 # It will take a little while to create all the frames and put them together:
-animate(ani_2019)
+animate(ani_2019, res = 144, width = 600, height = 750)
 
-# Could use some polish, but kinda fun and hopefully get's you thinking about 
+# Could use some polish, but kinda fun and hopefully gets you thinking about 
 # what you could do.
 
 # Inspiration:
-https://gganimate.com/ - main package website
-https://goodekat.github.io/presentations/2019-isugg-gganimate-spooky/
-  - really excellent walkthrough/demo
-https://slides.mitchelloharawild.com/wombat-gganimate
+# https://gganimate.com/ - main package website
+# https://goodekat.github.io/presentations/2019-isugg-gganimate-spooky/
+#   - really excellent walkthrough/demo
+# https://slides.mitchelloharawild.com/wombat-gganimate
