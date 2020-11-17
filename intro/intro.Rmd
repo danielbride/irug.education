@@ -1,0 +1,421 @@
+---
+title: "R Intro Exercises"
+output: 
+  learnr::tutorial:
+    theme: readable
+    ace_theme: github
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Welcome!
+
+This tutorial will give you the chance to practice running R code without 
+having to worry about the technical details of getting R running on your own
+computer. Of course, it will be important to start using R on your computer,
+but I think you'll feel more confident navigating any obstacles to setup after
+you've successfully practiced writing and running some actual R code. Here goes:
+
+## Functions: Something In, Something Out 
+
+The only thing R does is turn input into output. It does this in many creative,
+complex ways, but deep down it's as simple as **"Something in, something out."**
+
+### Print
+
+To see what I mean, run the code below. Either click the "**Run Code**" button
+or click somewhere within the text of the code and press `Ctrl` + `Enter`. 
+
+```{r print, exercise=TRUE}
+print("Hello, World!")
+```
+
+You just ran a function using R code! You provided the **input** "Hello, World!" to the `print()` function and saw
+the **output** printed to the screen (not to a printer). In this case, the 
+output was identical to the input. You might wonder why a function exists that 
+spits out exactly what it takes in. Hold that thought and run the code below:
+
+```{r addition, exercise=TRUE}
+print(60 * (24 - 7.5))
+```
+
+```{r quiz-1}
+quiz(
+  question("Think carefully about why that input turned into that output.
+           *Specifically, if `print()` just prints your input to the screen, 
+           why wasn't the output* \"60 * (24 - 7.5))\"? Choose the most accurate
+           answer.",
+    answer("A) Because R anticipates what you want, so when it sees math, 
+           it calculates and prints the answer.",
+           message = "This was tricky. R does end up solving the math problem, 
+           but not because R knows what you want. R has absolutely no
+           common sense and will only do what you explicitly tell it to do."),
+    answer("B) Because we didn't put quotes (\") around our input.",
+           message = "This was tricky. 
+           It's true that if we put quotes around our input it 
+           would have printed verbatim, but that's not the whole picture
+           (we'll discuss more later)."),
+    answer("C) Because `+` and `*` are functions, so they transform their input
+           and provide their output before `print()` performs its own work",
+           correct = TRUE),
+    allow_retry = TRUE,
+    try_again = "Try this until you get it right.",
+    correct = "Right! Tricky because they look different from most functions
+    (read more about this next)."
+  )
+)
+```
+
+### Seriously, *Everything* is a Function
+
+The last question was kind of unfair because most functions look like
+`function_name(input)` (e.g., `print("something")`), but those math functions
+don't. But remember I told you that everything in R happens because functions
+accept input and provide output. That's true even when something doesn't
+have that classic function look.
+
+To make this clearer, let's re-write those mathematical functions as if they
+were normal functions:
+
+```{r math-fun, exercise=TRUE}
+# When we're using a special symbol as the name of a function, 
+# we have to enclose it in backticks (``).
+`-`(24, 7.5)
+```
+
+Subtraction is just a function with two inputs—also called 
+arguments. The function subtracts the second argument
+from the first.
+
+Similarly, for multiplication:
+
+```{r math-fun2, exercise=TRUE}
+`*`(60, 16.5)
+```
+
+<!-- To take this to an absurd extreme, the same thing is true for the parentheses  -->
+<!-- we're using to define the order of operations: -->
+
+<!-- ```{r paren-fun, exercise=TRUE} -->
+<!-- `*`( 60, `(`( `-`( 24, 7.5  )) ) -->
+<!-- ``` -->
+
+<!-- Okay, we got the same answer but that's super confusing. 
+-->
+
+Why am I telling you this? Because I want to drill it into your head that
+everything that happens in R is the result of functions taking inputs and
+creating outputs. 
+
+### Directing Functions' Output
+
+But how did those answers print to the screen even though we didn't use the
+`print()` function? Okay, I know I just told you that R only does what you
+explicitly tell it to and this seems like R is making an assumption about 
+what we want to happen when we run some code. Well, R always does *something*
+with the result of any code you run, and the default action is to print it.
+
+Unless you tell it to do something else with the result, R prints it to the
+screen once it calculates a result. But even then, it's the `print()` function
+making it happen. Behind the scenes, `print()` takes in the result of your code
+and outputs it to the screen as text. **Something in, something out**.
+
+So, what else could we do with the output from a function? We've already seen
+one subtle example: when we ran this: `print(60 * (24 - 7.5))`, we were really
+putting one function (subtraction) inside another function (multiplication)
+inside another function (`print()`). The **output** of the subtraction function
+gets used as one **input** to the multiplication function, and the **output**
+from that function gets used as the **input** to the `print()` function. 
+
+### Nesting Functions
+
+This idea of one function within another function is really common, but you can
+see how it gets confusing really quickly. When you have functions inside 
+functions inside functions, you basically have to read code from the inside out
+to understand what it's doing. Later we'll discuss dealing with this, but
+for now understand that putting **function A** inside **function B** is one way
+of directing the output of function A to be used as an input for function B.
+Read on!
+
+## Packages Are Collections of Functions
+
+Enough silly theory. Now that you are sick of hearing about functions, let's 
+put some functions to good use.
+
+One of the most common functions you will use in R is the `library()` function.
+The name of an R package goes between the parentheses, with or without quotes.
+What does this do? Well, it's a bit like wishing for more wishes: it is used 
+to load packages, which are really just collections
+(libraries, if you will) of functions that aren't available until you make 
+them available. 
+
+Base R provides a number of functions that can do some 
+pretty useful things. These functions are made available automatically when
+you start R. In addition, R users and developers have written functions
+that either improve the usability of base R functions or provide capabilities
+that aren't built into R (e.g., specialized statistical techniques or plotting
+tools).
+
+### The `tidyverse`
+
+The tidyverse is a collection of several packages 
+written for specific purposes but with common design principles. 
+This means that as you learn the functions from one tidyverse package, 
+you'll start to intuitively recognize how to use functions from the other
+tidyverse packages.
+
+Try loading the tidyverse by modifying the code below (click the "Hint" button
+if you get stuck):
+
+```{r library-fun, exercise=TRUE}
+library()
+```
+
+```{r library-fun-hint}
+library(tidyverse)
+```
+
+The argument (input) we provided to the `library()` function was the name of
+a package. The output is a message letting us know that we actually loaded 
+several packages at once that are all collected under that one name. It also
+informs us that the names of a few functions from those packages conflict with
+names of functions from base R. That shouldn't be a problem for now, but be 
+aware that it can happen.
+
+### Browsing Available Functions
+
+After you load a package with the `library()` function, all functions within 
+that package will be available for you to use. One way to see some of those 
+functions is to type the name of a package, followed by two colons (`::`). 
+If you are in RStudio (or this tutorial), autocomplete should show you a list 
+of functions available in that package. 
+
+Try it! Since we loaded the `stringr` package with the rest of the tidyverse,
+try browsing the list of functions in that package below. **Hint: some packages
+contain additional resources, such as datasets. You should see both when browsing
+a package's contents. Try `stringr::fruit` to see a collection of character
+strings made available for learning the `stringr` package's functions.
+
+```{r browse-fun, exercise=TRUE}
+stringr
+```
+
+### Example: the Lubridate Package
+
+Let's get a quick introduction to using functions. For practice, we'll use
+some date and time related functions from the `lubridate` package. 
+
+First, complete the code below to load the `lubridate` package (remember which function to use? If not, click "Hint"):
+
+```{r load-lubridate, exercise=TRUE}
+(lubridate)
+```
+
+```{r load-lubridate-hint}
+library(lubridate)
+```
+
+This won't be a full worked example, but to make it concrete let's think about
+some of the things we would need to do to calculate a patient's age so we could
+use that value in a report. 
+
+One thing we need to do is get R to recognize the date string in our data
+as a Date object. This is important so R knows how to do math with it.
+
+Say the patient's date of birth is March 15, 1925, and it is stored in our 
+dataset as "4/15/1925". We can use the `mdy()` function from `lubridate` to 
+convert that input to a date output:
+
+```{r setupLub}
+library(lubridate)
+```
+
+
+```{r mdy-ex, exercise=TRUE, exercise.setup="setupLub"}
+mdy("4/15/1925")
+```
+
+The output from that doesn't look fancy, but it tells us that R is able to 
+transform that string into a machine-readable date object.
+
+Next, we need to capture today's date (assuming we're calculating a patient's 
+age as of today). We could just do the same thing as above but substitute 
+today's date. But if we're interested in turning this into something that we can
+re-use without remembering to manually update values, we need a **function**
+that can give us today's date. Here it is:
+
+```{r sysdate, exercise=TRUE, exercise.setup="setupLub"}
+today()
+```
+
+Knowing what you know, can you use those functions to calculate that patient's 
+age?
+
+```{r calc-age, exercise=TRUE, exercise.setup="setupLub"}
+
+```
+
+```{r calc-age-hint, eval=FALSE}
+today() - mdy("4/5/1925")
+```
+
+There are a few more steps to calculate it in years, etc. but we'll stop there.
+
+## Objects/Variables
+
+Since we're now thinking in terms of "function A, function B", let's go a step
+further and start saving the output of one function so we can use it more 
+easily in another function.
+
+Here's how I would capture the output of a mathematical function to use as input
+for another function later:
+
+```{r, echo=TRUE}
+waking_hours <- 24 - 7.5
+waking_hours
+```
+
+The first line of code above executes the subtraction function and then 
+associates the result with an R object called `waking_hours`. The `<-` symbol
+is called the **assignment operator** and it is how you "save" the output of
+a function for later use. When the other line of code runs, R performs the
+default action of printing the value of `waking_hours` to the screen.
+
+In math, when we have `x`, `y`, etc. as stand-ins for some value, we call `x`
+and `y` **variables**. The concept of a variable 
+also exists in R, but more often the saved value is referred to as an 
+**object**, so I'll favor that terminology. You give an object a short name 
+to refer to it easily later. An object can be almost anything, including 
+a combination of other objects. The objects we create for now will be simple.
+
+### Your First Object
+
+Fill in the code below with your first name to assign it to `my_name`. 
+The first line of code won't print any output—its output just gets assigned to
+the R object `my_name`. But once your first name is assigned to `my_name`, 
+you can use `my_name` to refer to the value you assigned. Below, we'll use
+the `paste()` function to combine a greeting with your name:
+
+```{r my-name, exercise=TRUE}
+my_name <- ""
+paste("Hi, my name is", my_name)
+```
+
+> The `paste()` function simply combines multiple character strings together into
+a single character string. The arguments you provide as input can be a mix 
+of quoted strings (e.g., `"My name is"`) and variables (also called 
+**objects**) you have previously defined.
+
+### Example: Intermediate Objects
+
+To avoid the mess of nesting functions( within functions( within functions)),
+we can gradually build up the objects we'll ultimately need to run a desired
+function, assigning those objects meaningful names so we can easily use them 
+as inputs for our ultimate function call. 
+
+It's easier to understand in an example. Fill in the code below to
+programmatically write a sentence that should be motivational but just makes
+me want to go back to sleep.
+
+1. Create an object on line 1 — name it `waking_hours` — whose value is 24 minus
+the number of hours you normally sleep each night (no one can see this but you, 
+so feel free to be silly or reveal your bad habits). 
+2. On line 2, create a new object — `waking_minutes` — whose value is
+`waking_hours` multiplied by 60 — i.e., the number of minutes you're usually
+awake each day. 
+3. Line 3 is finished for you. It makes one more object called `sentence` by
+combining some text with previously saved values.
+4. On line 5, fill in an exclamatory word of your choice inside the quotes.
+5. Lastly, on line 6, fill in the arguments to the `paste()` function with
+`sentence` and `exclamation` in whatever order feels right to you (separated
+by a comma).
+
+```{r fun-sequence, exercise=TRUE}
+waking_hours <- 
+ <- waking_hours * 60
+sentence <- paste("I have", waking_minutes, "minutes to use wisely today.")
+exclamation <- paste0("", "!")
+paste(, )
+```
+
+```{r fun-sequence-hint}
+waking_hours <- 6.5
+waking_minutes <- waking_hours * 60
+sentence <- paste("I have", waking_minutes, "minutes to use wisely today.")
+exclamation <- paste0("Golly", "!")
+paste(exclamation, sentence)
+```
+
+To me, as a human with very human processing limitations, writing out that
+sequence is easier to reason through as I'm putting it together than having
+to construct the whole thing in one line of code: 
+`paste("I have", ((24 - 6.5) * 60), "minutes to use wisely today")`. 
+Just as important, when I or someone else reads my code later, it should be 
+easier to understand what it means when those intermediate objects are defined
+and clearly labeled.
+
+> You are the ruler of your R code universe, so it's your responsibility and 
+privilege to name things however you see fit. Instead of naming a dataset
+`dat` or `data`, call it what it is: `trial_patients` or `lab_values`, etc.
+Try to avoid `patients1`, `patients2`, ... when making a series of changes
+to some data — as much as possible choose names that are meaningful 
+and intuitive.
+## Wrap Up
+
+## Congratulations!
+
+You've finished this tutorial. The concepts we covered here have the 
+potential to be boringly basic and/or intimidatingly complex. It's okay if 
+you felt either/both of those things. 
+
+We've hammered on the concepts of functions, inputs, outputs, and objects because
+from here things will accelerate very quickly. You'll forget about the basics
+because you'll be struggling to remember lists of new functions and 
+sweating over the technical details of making them work. You won't have time to
+remember the theory we've covered, and that's okay. 
+
+One day the stress of memorizing code syntax for specific packages will 
+subside and you'll feel curious again about how things work within R as a 
+whole system. You can always return to this tutorial, but likely you'll
+find more useful resources to learn from. The important thing is that you've
+taken the time at least once to build a general mental model of how R works, 
+which puts you ahead of many intermediate R users already.
+
+### Recap
+
+Here's a recap of important concepts:
+
+- A **function** takes input (**arguments**) and creates output.
+- Everything that happens in R is just functions taking input and 
+creating output.
+- Most functions live in **packages**, which you can load with the `library()`
+function.
+- The output from one function can be, and frequently is, the input for another.
+- Instead of printing it to the screen or using it in another function right 
+away, you can capture the output of a function as an R object, **assigning** it 
+a short, meaningful name.
+- The **assignment operator** `<-` is how you do that.
+
+### Up Next
+
+Transitioning from here to doing actual analytics work in R is a matter of
+temporarily accepting that some things work a certain way and you don't know 
+why yet. We'll gloss over details in favor of giving you some 
+templates/examples/recipes you can use as jumping off points for your own work.
+
+Important topics to get to next include
+
+- Importing data from files, databases, elsewhere
+- Inspecting data for errors or surprises
+- Shaping, cleaning, curating, and otherwise wrangling data
+- Visualizing data
+- Summarizing data
+- Modeling data
+- Communicating results
+
+R has great tools for all of these things, and they are fun to learn and use.
+Stick with it!

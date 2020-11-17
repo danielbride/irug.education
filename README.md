@@ -1,14 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# irug.education
+# `dplyr` Tutorial
 
 <!-- badges: start -->
 
 [![Launch Rstudio
-Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danielbride/irug.education/intro-lesson?urlpath=rstudio)
+Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/danielbride/irug.education/learnr-lesson-2?urlpath=shiny/intro/)
 <!-- badges: end -->
-
-The irug.education repository allows R learners at Intermountain to
-participate in live coding exercises and try interactive tutorials in a
-reliable and standardized environment. More to come.
